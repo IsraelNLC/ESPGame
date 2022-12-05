@@ -24,31 +24,35 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="senddata(0)">UP</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="sendData(0)">UP</button>
             </div>
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="denddata(1)">DOWN</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="sendData(1)">DOWN</button>
             </div>
         </div>
     </div>
 </body>
     <script>
         //script that sends the button data to the server
-        function senddata(button){
-            $.post("https://nyld21-3061.preview.csb.app/senddata"),
-            {
-                data: button
-            },
-            function(){
-                console.log("data sent");
-            }
+        function sendData(x) {
+            $.ajax({
+                type: "POST",
+                url: "https://nyld21-3061.preview.csb.app/sendposition",
+                data: {
+                    position: x
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
         }
 
         // continuously check if the game is over
         setInterval(function(){
-            $.get("https://nyld21-3061.preview.csb.app/sendgamestatus"),
-            function(data){
-                if(data == 1){
+            $.get("https://nyld21-3061.preview.csb.app/gamestatus"),
+            function(data, status){
+                console.log(data + " dadinho novo");
+                if(data.status == 0){
                     alert("game over");
                 }
             }
