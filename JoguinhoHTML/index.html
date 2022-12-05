@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML ESP GAME PROTOTYPE</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <!-- cabeçalho -->
@@ -23,12 +24,34 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-lg btn-block">UP</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="senddata(0)">UP</button>
             </div>
             <div class="col-6">
-                <button type="button" class="btn btn-primary btn-lg btn-block">DOWN</button>
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="denddata(1)">DOWN</button>
             </div>
         </div>
     </div>
 </body>
+    <script>
+        //script that sends the button data to the server
+        function senddata(button){
+            $.post("https://nyld21-3061.preview.csb.app/senddata"),
+            {
+                data: button
+            },
+            function(){
+                console.log("data sent");
+            }
+        }
+
+        // continuously check if the game is over
+        setInterval(function(){
+            $.get("https://nyld21-3061.preview.csb.app/sendgamestatus"),
+            function(data){
+                if(data == 1){
+                    alert("game over");
+                }
+            }
+        }, 200);
+    </script>
 </html>
