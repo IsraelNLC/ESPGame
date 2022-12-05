@@ -52,14 +52,19 @@
 
 
         // continuously check if the game is over
-        setInterval(function(){
-            $.get("https://nyld21-3061.preview.csb.app/gamestatus"),
-            function(data, status){
-                console.log(data + " dadinho novo");
-                if(data.status == 0){
-                    alert("game over");
+        setInterval(function() {
+            url = "/gamestatus"
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){
+                    if (data["status"] == 0){
+                        alert("GAME OVER! Please reset ESP32");
+                    }
                 }
-            }
+            });
         }, 200);
     </script>
 </html>
