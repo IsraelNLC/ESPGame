@@ -33,19 +33,23 @@
     </div>
 </body>
     <script>
-        //script that sends the button data to the server
-        function sendData(x) {
+        //jquery script that sends the button data to the server
+        function sendData(x){
+            url = "/sendposition"
             $.ajax({
                 type: "POST",
-                url: "https://nyld21-3061.preview.csb.app/sendposition",
-                data: {
-                    position: x
-                },
-                success: function (data) {
-                    console.log(data);
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(
+                {
+                    "position": x
                 }
+                )
             });
         }
+    
+
 
         // continuously check if the game is over
         setInterval(function(){
