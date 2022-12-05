@@ -1,0 +1,3 @@
+Antes de criar a versão integrada WEB, eu criei essa versão single player,
+em que os projeteis são criados aleatoriamente e depois adaptei para a
+versão de dois players. A montagem física é exatamente a mesma.
